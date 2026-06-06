@@ -8,18 +8,25 @@ const protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
 
     if (!token)
-      return res.status(401).json({ success: false, message: 'No token provided' });
+      return res.status(401).json({
+     success: false, message: 'No token provided' 
+    });
 
     const decoded = verifyToken(token);
     const user    = await User.findById(decoded.id);
 
     if (!user || !user.isActive)
-      return res.status(401).json({ success: false, message: 'User not found or inactive' });
+      return res.status(401).json({
+     success: false,
+     message: 'User not found or inactive'
+     });
 
     req.user = user;
     next();
   } catch {
-    res.status(401).json({ success: false, message: 'Invalid or expired token' });
+    res.status(401).json({
+       success: false,
+       message: 'Invalid or expired token' });
   }
 };
 

@@ -6,6 +6,7 @@ const { protect, authorize } = require('../middlewares/authMiddleware');
 const { signup, signin, getMe,forgotPassword, verifyResetToken, resetPassword } = require('../controllers/authController');
 const authRouter = express.Router();
 
+
 authRouter.post('/signup', [
   body('name').notEmpty().withMessage('Name required'),
   body('email').isEmail().withMessage('Valid email required'),
