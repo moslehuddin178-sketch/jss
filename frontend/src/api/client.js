@@ -7,6 +7,7 @@ const client = axios.create({
 
 // Inject auth token on every request
 client.interceptors.request.use((config) => {
+  
   const token = localStorage.getItem('sp_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;

@@ -29,6 +29,7 @@ const windDir = (deg) => {
 
 // ── Business tip based on weather ────────────────────────────────────────────
 const getBusinessTip = (data) => {
+
   if (!data) return null;
   const { condition, temperature, humidity } = data;
   if (condition === 'Rain' || condition === 'Thunderstorm' || condition === 'Drizzle')
@@ -48,10 +49,12 @@ const getBusinessTip = (data) => {
 // COMPACT variant — used in Topbar
 // ─────────────────────────────────────────────────────────────────────────────
 export function WeatherTicker({ city }) {
+
   const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    
     const token = localStorage.getItem('sp_token');
     const url   = `/api/weather${city ? `?city=${encodeURIComponent(city)}` : ''}`;
     fetch(url, { headers: { Authorization: `Bearer ${token}` } })
