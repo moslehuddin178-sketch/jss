@@ -25,7 +25,7 @@ const customerSchema = new mongoose.Schema(
     // ── Wholesale specific ────────────────────────────────────────────────────
     companyName:  { type: String, trim: true },
     taxNumber:    { type: String, trim: true },
-    creditLimit:  { type: Number, default: 0 },       // max credit extended
+    creditLimit:  { type: Number, default: 0 },        // max credit extended
     creditUsed:   { type: Number, default: 0 },        // current outstanding
     discountRate: { type: Number, default: 0 },        // extra % discount for this customer
     paymentTermDays: { type: Number, default: 0 },     // net30, net60 etc.
