@@ -1,4 +1,11 @@
 import client from './client';
+import axios from 'axios';
+
+// Separate axios instance — NO auth token attached (public storefront)
+const publicClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '/api',
+  timeout: 15000,
+});
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 export const authAPI = {
@@ -89,4 +96,12 @@ export const weatherAPI = {
   getCurrent:  (city) => client.get('/weather',          { params: city ? { city } : {} }),
   getForecast: (city) => client.get('/weather/forecast', { params: city ? { city } : {} }),
   clearCache:  ()     => client.delete('/weather/cache'),
+};
+
+// ── Public Storefront ─────────────────────────────────────────────────────────
+export const publicAPI = {
+  catalog:     (params) => publicClient.get('/public/catalog', { params }),
+  getProduct:  (id)     => publicClient.get(`/public/product/${id}`),
+  categories:  ()       => publicClient.get('/public/categories'),
+  silverPrice: ()       => publicClient.get('/public/silver-price'),
 };
