@@ -14,6 +14,8 @@ import Settings    from './pages/settings/Settings';
 import AIAssistant from './pages/ai/AIAssistant';
 import ForgotPassword from './pages/auth/forgotPassword';
 import ResetPassword  from './pages/auth/resetPassword';
+import Storefront    from './pages/shop/Storefront';
+import ProductDetail from './pages/shop/ProductDetail';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -47,6 +49,9 @@ export default function App() {
           <Route path="*"          element={<Navigate to="/dashboard" replace />} />
           <Route path="/forgot-password"      element={<PublicRoute><ForgotPassword /></PublicRoute>} />
           <Route path="/reset-password/:token" element={<PublicRoute><ResetPassword  /></PublicRoute>} />
+          {/* Public storefront — no login needed */}
+          <Route path="/shop"     element={<Storefront />} />
+          <Route path="/shop/:id" element={<ProductDetail />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
